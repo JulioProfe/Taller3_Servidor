@@ -15,7 +15,7 @@ public class Data {
 
 	XML raiz;
 	File archivo;
-	
+
 	public Data(String ruta) {
 		// TODO Auto-generated constructor stub
 		archivo = new File(ruta);
@@ -31,25 +31,30 @@ public class Data {
 			raiz.addChild("user");
 		}
 	}
-	public void guardar(){
+
+	public void guardar() {
 		raiz.save(archivo);
 	}
-	public void agregarUsuario(Usuario u){
+
+	public void agregarUsuario(Usuario u) {
 		XML usuarios = raiz.getChild("user");
 		XML newUser = usuarios.addChild("usuario");
 		newUser.setString("name", u.getName());
 		newUser.setString("pass", u.getPass());
 	}
-	public ArrayList<Usuario> getUsuarios(){
+
+	public ArrayList<Usuario> getUsuarios() {
 		XML usuarios = raiz.getChild("user");
 		ArrayList<Usuario> users = new ArrayList<Usuario>();
-		if (usuarios.getChildCount()>0) {
+		if (usuarios.getChildCount() > 0) {
 			XML[] usuarioXML = usuarios.getChildren("usuario");
 			for (int i = 0; i < usuarioXML.length; i++) {
-//				String name = usuarioXML.getClass()
+				String name = usuarioXML.toString();
+				String pass = usuarioXML.toString();
+
+				users.add(new Usuario(name, pass));
 			}
 		}
 		return users;
-		
 	}
 }
